@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NovaBank ARIA - AI-powered banking call center assistant for 24/7 customer support">
+  <title>NovaBank ARIA — Banking Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container" id="app">
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Branding -->
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2L4 8v8c0 7.73 5.12 14.95 12 16.73C22.88 30.95 28 23.73 28 16V8L16 2z" fill="none" stroke="white" stroke-width="2"/>
+              <text x="16" y="20" text-anchor="middle" fill="white" font-size="11" font-weight="700" font-family="Inter, sans-serif">NB</text>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">NovaBank</div>
+            <div class="brand-tagline">Digital Banking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARIA Agent Card -->
+      <div class="agent-card">
+        <div class="agent-avatar"><img src="https://img.icons8.com/color/96/headset--v1.png" width="30" height="30" alt="ARIA" style="display:block;"></div>
+        <div class="agent-info">
+          <div class="agent-name">ARIA</div>
+          <div class="agent-role">Virtual Assistant</div>
+          <div class="agent-status">
+            <span class="status-dot"></span>
+            Online
+          </div>
+        </div>
+      </div>
+
+      <!-- Department Selector -->
+      <div class="department-section">
+        <div class="department-label">Select Department</div>
+        <div class="select-wrapper">
+          <select class="department-select" id="departmentSelect">
+            <option value="General Support">General Support</option>
+            <option value="Account &amp; Balance">Account &amp; Balance</option>
+            <option value="Card Services">Card Services</option>
+            <option value="Loan &amp; EMI">Loan &amp; EMI</option>
+            <option value="Transaction Disputes">Transaction Disputes</option>
+            <option value="Internet Banking">Internet Banking</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer Info -->
+      <div class="sidebar-info">
+        <div class="info-item">
+          <span class="info-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span>256-bit SSL Encrypted</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span>Available 24/7</span>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span>1800-NOVA-BANK</span>
+        </div>
+
+        <!-- New Conversation Button -->
+        <button class="btn-new-conversation" id="clearChatBtn">New Conversation</button>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <div class="chat-header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="header-avatar"><img src="https://img.icons8.com/color/96/headset--v1.png" width="30" height="30" alt="ARIA" style="display:block;"></div>
+          <div class="header-info">
+            <span class="header-title">ARIA</span>
+            <span class="header-dept-badge" id="headerDeptBadge">General Support</span>
+          </div>
+        </div>
+        <div class="chat-header-right">
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            <span class="live-text">Live</span>
+          </div>
+          <span class="session-timer" id="sessionTimer">00:00</span>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- Welcome Section -->
+        <div class="welcome-section" id="welcomeSection">
+          <div class="welcome-icon"><img src="https://img.icons8.com/color/96/headset--v1.png" width="30" height="30" alt="ARIA" style="display:block;"></div>
+          <h1 class="welcome-title">Welcome to NovaBank</h1>
+          <p class="welcome-sub">
+            Welcome to NovaBank Customer Support. I am ARIA, your dedicated virtual banking assistant. I am available around the clock to assist you with account enquiries, card services, loan support, and more. Please select a department from the sidebar or type your query to get started.
+          </p>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="msg-avatar aria-avatar"><img src="https://img.icons8.com/color/96/headset--v1.png" width="30" height="30" alt="ARIA" style="display:block;"></div>
+        <div class="typing-bubble">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-area">
+        <div class="input-wrapper">
+          <textarea
+            class="chat-input"
+            id="chatInput"
+            placeholder="Type your message..."
+            rows="1"
+            maxlength="500"
+            aria-label="Message input"
+          ></textarea>
+        </div>
+        <div class="input-footer">
+          <span class="char-counter" id="charCounter">0 / 500</span>
+          <button class="send-btn" id="sendBtn" disabled aria-label="Send message">
+            Send
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
