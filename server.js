@@ -9,8 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
-
+app.use(express.static('.'));
 // Validate API key on startup
 if (!process.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY === 'your_gemini_api_key_here') {
   console.error('\n❌  ERROR: GEMINI_API_KEY is not set.');
